@@ -1,0 +1,48 @@
+=== a9linux/qemu harness run: 02-dtb-unfilled-memory ===
+utc_start      : 2026-10-03T11:02:32Z
+qemu_version   : QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+machine        : virt  cpu=cortex-a57 smp=2 mem=1024M
+kernel         : /opt/a9qemu/inputs/stock-Image
+kernel_sha256  : 9e114978788d0639aecf0e17b04aff687613b58177b7d86b669e3d99fc6e0b3e
+kernel_pages   : 4K pages
+dtb            : /opt/a9qemu/inputs/n69-qemu-console.dtb
+dtb_sha256     : 446028bb09766c16ded9d9cdc570cd7d1022b8a3b77ea86d4425d6e64faee415
+dtb_size       : 23148
+initrd         : /opt/a9qemu/inputs/harness-selfinit.cpio.gz
+initrd_sha256  : 552422d527b3837ab3b786fd001a62d5afa774643e32787e65768ffa22788a6b
+initrd_size    : 941184
+append         : console=ttyAMA0 earlycon=pl011,0x9000000 rdinit=/init panic=-1 loglevel=7
+timeout_s      : 90
+exact_command  : timeout -k 5 90 qemu-system-aarch64 -M virt -cpu cortex-a57 -smp 2 -m 1024 -display none -serial stdio -no-reboot -monitor none -kernel /opt/a9qemu/inputs/stock-Image -dtb /opt/a9qemu/inputs/n69-qemu-console.dtb -initrd /opt/a9qemu/inputs/harness-selfinit.cpio.gz -append console=ttyAMA0 earlycon=pl011,0x9000000 rdinit=/init panic=-1 loglevel=7
+==========================================
+------------------------------------------
+utc_end        : 2026-10-03T11:02:34Z
+exit           : 0 (guest powered off / halted cleanly)
+console_bytes  : 5688
+console_lines  : 87
+tail           :
+    | [    0.000000] Hardware name: Apple iPhone SE (TSMC) (DT)
+    | [    0.000000] pstate: 604000c5 (nZCv daIF +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+    | [    0.000000] pc : aic_of_ic_init+0x610/0x800
+    | [    0.000000] lr : aic_of_ic_init+0x610/0x800
+    | [    0.000000] sp : ffff800083253c90
+    | [    0.000000] x29: ffff800083253d10 x28: ffff8000837345e8 x27: ffff8000837349a0
+    | [    0.000000] x26: dead000000000122 x25: ffff800082715064 x24: ffff8000817420c0
+    | [    0.000000] x23: 0000000000000000 x22: ffff800083900004 x21: ffff800082715064
+    | [    0.000000] x20: ffff00003fdfd650 x19: ffff00000422f900 x18: ffff80008326bce8
+    | [    0.000000] x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+    | [    0.000000] x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+    | [    0.000000] x11: 0000000000000000 x10: ffff8400840b7c0b x9 : ffff8000812abc58
+    | [    0.000000] x8 : 0101010101010101 x7 : 7f7f7f7f7f7f7f7f x6 : 01fefefefefeff62
+    | [    0.000000] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+    | [    0.000000] x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+    | [    0.000000] Call trace:
+    | [    0.000000]  aic_of_ic_init+0x610/0x800
+    | [    0.000000]  of_irq_init+0x22c/0x458
+    | [    0.000000]  irqchip_init+0x24/0x68
+    | [    0.000000]  init_IRQ+0x128/0x228
+    | [    0.000000]  start_kernel+0x1dc/0x438
+    | [    0.000000]  __primary_switched+0xc0/0xd0
+    | [    0.000000] Code: aa1603e1 90000002 9117d042 97895fd1 (b94002d7) 
+    | [    0.000000] ---[ end trace 0000000000000000 ]---
+    | [    0.000000] Kernel panic - not syncing: Attempted to kill the idle task!

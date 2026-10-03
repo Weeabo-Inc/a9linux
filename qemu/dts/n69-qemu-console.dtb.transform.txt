@@ -1,0 +1,4 @@
+# transforms applied to source-n69.dtb for QEMU mode=console
+GRAFT: added pl011@9000000 (arm,pl011, QEMU virt's UART) + 24MHz fixed clock. QEMU emulates this UART; A9's apple,s5l-uart at 0x20A0C000 is NOT emulated.
+EDIT: /aliases/serial0 now points at the grafted pl011 (was /soc/serial@20a0c0000). /chosen/stdout-path stays "serial0", so the kernel's alias->node resolution is still exercised.
+dtc emitted 81 warning line(s) on recompile (clocks_property x7, gpios_property x5, phys_property x1, power_domains_property x66, resets_property x1, simple_bus_reg x1); full text in n69-qemu-console.dtb.dtc-warnings.txt. These are all pre-existing upstream shape warnings (phandle-less clock/power-domain cells after decompile) plus the upstream /soc/bus@20c000000 unit-address/reg mismatch.

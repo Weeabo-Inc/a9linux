@@ -1,0 +1,50 @@
+=== a9linux/qemu harness run: 14-variant-our-dtb-stub ===
+utc_start      : 2026-10-03T11:26:22Z
+qemu_version   : QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+machine        : virt  cpu=max smp=2 mem=1024M
+kernel         : /opt/a9qemu/inputs/arlo-Image-qemu-pl011
+kernel_sha256  : 2697e77d901d44844cb8871400ee59119148be08182ccf57bbb6df9b766fde88
+kernel_pages   : 16K pages
+dtb            : /opt/a9qemu/inputs/n69-variant-stub.dtb
+dtb_sha256     : e36d6efd429030d4396e9991d62f0e865de6b72df851c015fa41f3e54e32f436
+dtb_size       : 23809
+initrd         : /opt/a9qemu/inputs/arlo-initramfs-min.cpio.gz
+initrd_sha256  : c8b2dbb4a10c6510fab492c9b2eebc452fa4b2c5270f30b69710cad7c4ec2608
+initrd_size    : 997191
+loader_stub    : /opt/a9qemu/inputs/handoff-stub.bin  (QEMU does NOT load the kernel; the stub does the hand-off)
+load_addrs     : image=0x40080000 dtb=0x44100000 initrd=0x44200000 stub=0x44000000 (cpu0+cpu1)
+append         : 
+timeout_s      : 180
+exact_command  : timeout -k 5 180 qemu-system-aarch64 -M virt -cpu max -smp 2 -m 1024 -display none -serial stdio -no-reboot -monitor none -dtb /opt/a9qemu/inputs/n69-variant-stub.dtb -device loader,file=/opt/a9qemu/inputs/arlo-Image-qemu-pl011,addr=0x40080000,force-raw=on -device loader,file=/opt/a9qemu/inputs/n69-variant-stub.dtb,addr=0x44100000,force-raw=on -device loader,file=/opt/a9qemu/inputs/arlo-initramfs-min.cpio.gz,addr=0x44200000,force-raw=on -device loader,file=/opt/a9qemu/inputs/handoff-stub.bin,addr=0x44000000,force-raw=on,cpu-num=0 -device loader,file=/opt/a9qemu/inputs/handoff-stub.bin,addr=0x44000000,force-raw=on,cpu-num=1
+==========================================
+------------------------------------------
+utc_end        : 2026-10-03T11:29:25Z
+exit           : 124 (WALL-CLOCK TIMEOUT after 180s — did not finish)
+console_bytes  : 15116
+console_lines  : 242
+tail           :
+    | clock: Thu Jan  1 00:00:06 UTC 1970
+    |        (on A9 expect 1970-01-01: no RTC driver upstream -- the RTC is in the
+    |         PMIC and there is no PMIC driver. A real date here means this is a
+    |         virtual machine with an RTC, i.e. not the phone.)
+    | 
+    | 
+    | 
+    | BusyBox v1.35.0 (Debian 1:1.35.0-4+deb12u1+b1) built-in shell (ash)
+    | Enter 'help' for a list of built-in commands.
+    | 
+    | 
+    | arlo -- RAM-backed Debian arm64 initramfs (iPhone SE 1st gen / A9 s8003 / n69ap)
+    | 
+    | What works here:  a shell, coreutils, dpkg, busybox -- all from RAM.
+    | What does not:    storage, USB host, Wi-Fi, network, PMIC (power/battery/RTC),
+    |                   GPU, and the camera. None of those drivers exist upstream
+    |                   for A9. There is no disk to install to and no way to save
+    |                   anything. Rebooting loses everything, by design.
+    | 
+    | If you can read this on the phone's screen, the framebuffer console is up --
+    | that is a much bigger result than the shell itself.
+    | 
+    | Full statement: /etc/arlo/CAPABILITY.txt
+    | arlo:/# [6n[   16.436578] platform gpio-keys: deferred probe pending: gpio-keys: failed to get gpio
+    | qemu-system-aarch64: terminating on signal 15 from pid 766 (timeout)

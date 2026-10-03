@@ -1,0 +1,50 @@
+=== a9linux/qemu harness run: 05-loader-stub-handoff ===
+utc_start      : 2026-10-03T13:56:33Z
+qemu_version   : QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+machine        : virt  cpu=cortex-a57 smp=2 mem=1024M
+kernel         : <HOME>/.local/state/a9qemu/inputs/stock-Image
+kernel_sha256  : 9e114978788d0639aecf0e17b04aff687613b58177b7d86b669e3d99fc6e0b3e
+kernel_pages   : 4K pages
+dtb            : <HOME>/.local/state/a9qemu/inputs/n69-qemu-stub.dtb
+dtb_sha256     : f570305bc8356bae0cc954edc02e21c003a896c92170a966e83ecac906738def
+dtb_size       : 23809
+initrd         : <HOME>/.local/state/a9qemu/inputs/harness-selfinit.cpio.gz
+initrd_sha256  : 350ca58b6a1c39e45be8cf00386bfcd43b911fefa68fecd02d2f7398416b4632
+initrd_size    : 940621
+loader_stub    : <HOME>/.local/state/a9qemu/inputs/handoff-stub.bin  (QEMU does NOT load the kernel; the stub does the hand-off)
+load_addrs     : image=0x40080000 dtb=0x44100000 initrd=0x44200000 stub=0x44000000 (cpu0+cpu1)
+append         : 
+timeout_s      : 240
+exact_command  : timeout -k 5 240 qemu-system-aarch64 -M virt -cpu cortex-a57 -smp 2 -m 1024 -display none -serial stdio -no-reboot -monitor none -dtb <HOME>/.local/state/a9qemu/inputs/n69-qemu-stub.dtb -device loader,file=<HOME>/.local/state/a9qemu/inputs/stock-Image,addr=0x40080000,force-raw=on -device loader,file=<HOME>/.local/state/a9qemu/inputs/n69-qemu-stub.dtb,addr=0x44100000,force-raw=on -device loader,file=<HOME>/.local/state/a9qemu/inputs/harness-selfinit.cpio.gz,addr=0x44200000,force-raw=on -device loader,file=<HOME>/.local/state/a9qemu/inputs/handoff-stub.bin,addr=0x44000000,force-raw=on,cpu-num=0 -device loader,file=<HOME>/.local/state/a9qemu/inputs/handoff-stub.bin,addr=0x44000000,force-raw=on,cpu-num=1
+==========================================
+------------------------------------------
+utc_end        : 2026-10-03T14:00:33Z
+exit           : 124 (WALL-CLOCK TIMEOUT after 240s — did not finish)
+console_bytes  : 19044
+console_lines  : 302
+tail           :
+    | A9QEMU-SELFTEST: ---- meminfo ----
+    | MemTotal:         978132 kB
+    | MemFree:          936792 kB
+    | MemAvailable:     903556 kB
+    | A9QEMU-SELFTEST: console-node /dev/ttyAMA0 present
+    | A9QEMU-SELFTEST: console-node /dev/ttyS0 present
+    | A9QEMU-SELFTEST: console-node /dev/tty0 present
+    | A9QEMU-SELFTEST: console-node /dev/console present
+    | A9QEMU-SELFTEST: ---- /sys/bus/platform/devices (first 25) ----
+    | 7c000000.framebuffer
+    | Fixed MDIO bus.0
+    | gpio-keys
+    | kgdboc
+    | psci-cpuidle
+    | reg-dummy
+    | serial8250
+    | soc
+    | timer
+    | A9QEMU-SELFTEST: spin-table mailbox 0x44004000 = <READ FAILED>
+    | A9QEMU-SELFTEST: mailbox read FAILED (STRICT_DEVMEM?) -> proves nothing about whether the kernel wrote it
+    | A9QEMU-SELFTEST: framebuffer marker written to /dev/fb0
+    | A9QEMU-SELFTEST: REACHED-USERLAND
+    | A9QEMU-SELFTEST: END
+    | [   10.352432] reboot: Power off not available: System halted instead
+    | qemu-system-aarch64: terminating on signal 15 from pid 293288 (timeout)

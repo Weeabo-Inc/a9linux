@@ -1,0 +1,48 @@
+=== a9linux/qemu harness run: 04-dtb-qemu-virt ===
+utc_start      : 2026-10-03T13:56:14Z
+qemu_version   : QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+machine        : virt  cpu=cortex-a57 smp=2 mem=1024M
+kernel         : <HOME>/.local/state/a9qemu/inputs/stock-Image
+kernel_sha256  : 9e114978788d0639aecf0e17b04aff687613b58177b7d86b669e3d99fc6e0b3e
+kernel_pages   : 4K pages
+dtb            : <HOME>/.local/state/a9qemu/inputs/n69-qemu-virt.dtb
+dtb_sha256     : b600ddd599a040546d61dc96cad0038b6211276b1fe0c1aed5f94642e34d7906
+dtb_size       : 23616
+initrd         : <HOME>/.local/state/a9qemu/inputs/harness-selfinit.cpio.gz
+initrd_sha256  : 350ca58b6a1c39e45be8cf00386bfcd43b911fefa68fecd02d2f7398416b4632
+initrd_size    : 940621
+append         : console=ttyAMA0 earlycon=pl011,0x9000000 rdinit=/init panic=-1 loglevel=7
+timeout_s      : 180
+exact_command  : timeout -k 5 180 qemu-system-aarch64 -M virt -cpu cortex-a57 -smp 2 -m 1024 -display none -serial stdio -no-reboot -monitor none -kernel <HOME>/.local/state/a9qemu/inputs/stock-Image -dtb <HOME>/.local/state/a9qemu/inputs/n69-qemu-virt.dtb -initrd <HOME>/.local/state/a9qemu/inputs/harness-selfinit.cpio.gz -append console=ttyAMA0 earlycon=pl011,0x9000000 rdinit=/init panic=-1 loglevel=7
+==========================================
+------------------------------------------
+utc_end        : 2026-10-03T13:56:27Z
+exit           : 0 (guest powered off / halted cleanly)
+console_bytes  : 18670
+console_lines  : 300
+tail           :
+    |   7fde4000-7fe05fff : reserved
+    |   7fe06000-7fffffff : reserved
+    | A9QEMU-SELFTEST: ---- meminfo ----
+    | MemTotal:         978092 kB
+    | MemFree:          934636 kB
+    | MemAvailable:     901400 kB
+    | A9QEMU-SELFTEST: console-node /dev/ttyAMA0 present
+    | A9QEMU-SELFTEST: console-node /dev/ttyS0 present
+    | A9QEMU-SELFTEST: console-node /dev/tty0 present
+    | A9QEMU-SELFTEST: console-node /dev/console present
+    | A9QEMU-SELFTEST: ---- /sys/bus/platform/devices (first 25) ----
+    | 7c000000.framebuffer
+    | Fixed MDIO bus.0
+    | gpio-keys
+    | kgdboc
+    | psci
+    | psci-cpuidle
+    | reg-dummy
+    | serial8250
+    | soc
+    | timer
+    | A9QEMU-SELFTEST: framebuffer marker written to /dev/fb0
+    | A9QEMU-SELFTEST: REACHED-USERLAND
+    | A9QEMU-SELFTEST: END
+    | [   10.292192] reboot: Power down

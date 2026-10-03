@@ -1,0 +1,46 @@
+=== a9linux/qemu harness run: 01-baseline-virt-stockkernel ===
+utc_start      : 2026-10-03T10:22:01Z
+qemu_version   : QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+machine        : virt  cpu=cortex-a57 smp=2 mem=1024M
+kernel         : /opt/a9qemu/inputs/stock-Image
+kernel_sha256  : 9e114978788d0639aecf0e17b04aff687613b58177b7d86b669e3d99fc6e0b3e
+kernel_pages   : 4K pages
+dtb            : (none — QEMU generates the virt DT)
+initrd         : /opt/a9qemu/inputs/harness-selfinit.cpio.gz
+initrd_sha256  : 0f3489e0e21b3cc570313a4532f02fcb45f2ac5667a923a64728159ac8787b94
+initrd_size    : 940221
+append         : console=ttyAMA0 earlycon=pl011,0x9000000 rdinit=/init panic=-1 loglevel=7
+timeout_s      : 300
+exact_command  : timeout -k 5 300 qemu-system-aarch64 -M virt -cpu cortex-a57 -smp 2 -m 1024 -display none -serial stdio -no-reboot -monitor none -kernel /opt/a9qemu/inputs/stock-Image -initrd /opt/a9qemu/inputs/harness-selfinit.cpio.gz -append console=ttyAMA0 earlycon=pl011,0x9000000 rdinit=/init panic=-1 loglevel=7
+==========================================
+------------------------------------------
+utc_end        : 2026-10-03T10:22:14Z
+exit           : 0 (guest powered off / halted cleanly)
+console_bytes  : 20749
+console_lines  : 338
+tail           :
+    | Fixed MDIO bus.0
+    | a000000.virtio_mmio
+    | a000200.virtio_mmio
+    | a000400.virtio_mmio
+    | a000600.virtio_mmio
+    | a000800.virtio_mmio
+    | a000a00.virtio_mmio
+    | a000c00.virtio_mmio
+    | a000e00.virtio_mmio
+    | a001000.virtio_mmio
+    | a001200.virtio_mmio
+    | a001400.virtio_mmio
+    | a001600.virtio_mmio
+    | a001800.virtio_mmio
+    | a001a00.virtio_mmio
+    | a001c00.virtio_mmio
+    | a001e00.virtio_mmio
+    | a002000.virtio_mmio
+    | a002200.virtio_mmio
+    | a002400.virtio_mmio
+    | a002600.virtio_mmio
+    | a002800.virtio_mmio
+    | A9QEMU-SELFTEST: REACHED-USERLAND
+    | A9QEMU-SELFTEST: END
+    | [    8.119811] reboot: Power down
